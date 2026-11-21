@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090d1b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NightFlow">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>NightFlow</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090d1b;--panel:#121a30;--panel2:#18233e;--line:#263453;--muted:#9ba9c7;--white:#f5f7ff;--purple:#8b7cff;--cyan:#65d7e8}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(ellipse at 50% -15%,#27345c 0%,var(--bg) 55%);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 16px calc(28px + env(safe-area-inset-bottom))}
+    .app{max-width:540px;margin:0 auto}.top{display:flex;align-items:center;justify-content:space-between;padding:20px 2px 18px}.brand{font-size:25px;font-weight:800;letter-spacing:-.8px}.brand span{color:var(--purple)}.date{color:var(--muted);font-size:12px;margin-top:4px}.avatar{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,#6d61db,#2f9bb4);display:grid;place-items:center;font-size:20px}
+    .hero{border:1px solid #34436a;background:linear-gradient(145deg,rgba(42,54,94,.9),rgba(18,26,48,.95));border-radius:26px;padding:22px;margin-bottom:16px;box-shadow:0 18px 50px #0005}.eyebrow{font-size:11px;letter-spacing:1.6px;color:#b8c5e5;text-transform:uppercase}.clock{font-size:54px;letter-spacing:-2px;font-weight:750;margin:7px 0 0;font-variant-numeric:tabular-nums}.hero-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:15px;color:#c4cee5;font-size:13px}.pill{background:#27385b;border:1px solid #42557e;border-radius:30px;padding:7px 11px;font-size:11px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:21px;padding:16px;min-width:0}.card.full{grid-column:1/-1}.icon{font-size:23px;margin-bottom:12px}.card h2{font-size:16px;margin:0 0 5px}.sub{color:var(--muted);font-size:12px;line-height:1.45}.big{font-size:25px;font-weight:750;margin:12px 0 4px;font-variant-numeric:tabular-nums}.btn{border:0;border-radius:13px;padding:12px 14px;background:linear-gradient(100deg,#8175f5,#4f8fca);color:white;font-weight:700;font-size:13px;width:100%;margin-top:13px;cursor:pointer}.btn.secondary{background:#253453;border:1px solid #3a4c70}.btn.ghost{background:transparent;border:1px solid #455779}.section-title{display:flex;align-items:center;justify-content:space-between;margin:24px 2px 11px}.section-title h2{font-size:17px;margin:0}.section-title small{color:var(--muted)}
+    .row{display:flex;align-items:center;gap:12px}.row+.row{margin-top:12px}.cover{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#6456c9,#1b7895);display:grid;place-items:center;font-size:20px;flex-shrink:0;overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover}.grow{flex:1;min-width:0}.name{font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tiny{font-size:11px;color:var(--muted);margin-top:4px}.play{border:1px solid #3e5075;background:#253453;color:white;border-radius:50%;width:39px;height:39px;font-size:15px;cursor:pointer}
+    input,select{width:100%;background:#0d1427;border:1px solid #344362;color:white;border-radius:12px;padding:12px;font-size:14px;margin-top:7px;min-width:0}label{display:block;color:#bdc9e3;font-size:12px;margin-top:12px}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:9px}.alarm{padding:12px;background:#0e162a;border:1px solid #263653;border-radius:15px;margin-top:9px}.alarm-time{font-size:23px;font-weight:750}.alarm-meta{font-size:11px;color:var(--muted);margin-top:3px}.alarm-head{display:flex;align-items:center;justify-content:space-between}.del{background:transparent;color:#f59aab;border:0;font-size:18px;padding:5px}.notice{margin-top:12px;padding:12px;border-radius:13px;background:#302b1e;border:1px solid #655532;color:#f5df9f;font-size:12px;line-height:1.5}.foot{text-align:center;color:#7785a5;font-size:10px;margin:24px 0 8px}.modal{position:fixed;inset:0;background:#0009;display:none;align-items:end;justify-content:center;padding:14px;z-index:5}.modal.show{display:flex}.sheet{background:#141e36;border:1px solid #35476e;border-radius:24px;padding:20px;width:100%;max-width:520px}.sheet h3{margin:0 0 8px}.sheet p{color:#b7c4df;font-size:13px;line-height:1.5}.close{float:right;background:#2a3959;border:0;color:white;border-radius:10px;padding:7px 10px}
+    @media(min-width:600px){body{padding-top:30px}.hero{padding:28px}.clock{font-size:64px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div><div class="brand">Night<span>Flow</span></div><div class="date" id="today">Ton espace de nuit</div></div>
+    <div class="avatar">☾</div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Ton espace de nuit</div>
+    <div class="clock" id="clock">--:--</div>
+    <div class="hero-bottom"><span id="greeting">Prends le temps de souffler.</span><span class="pill">MODE PERSONNEL</span></div>
+  </section>
+
+  <main class="grid">
+    <section class="card">
+      <div class="icon">⏰</div><h2>Mes réveils</h2><div class="sub">Organise tes alarmes du matin.</div>
+      <div class="big" id="alarmCount">0</div><div class="sub">alarme(s) enregistrée(s)</div>
+      <button class="btn" onclick="openModal('alarmModal')">+ Ajouter un réveil</button>
+      <button class="btn secondary" onclick="runShortcut('alarm')">Lancer mon raccourci d’alarme</button>
+      <button class="btn ghost" onclick="showInfo('Réveil iPhone','Le raccourci peut ouvrir ou créer une alarme selon ce que tu lui fais faire. Vérifie toujours que l’alarme apparaît bien dans Horloge.')">Conseils</button>
+    </section>
+
+    <section class="card">
+      <div class="icon">🌙</div><h2>Minuteur sommeil</h2><div class="sub">Lance un compte à rebours pendant que tu te prépares à dormir.</div>
+      <div class="big" id="timerDisplay">30:00</div><div class="sub" id="timerStatus">Minuteur prêt</div>
+      <label>Durée personnalisée</label>
+      <div class="formrow"><div><label for="durationMinutes">Minutes</label><input id="durationMinutes" type="number" min="0" max="999" value="30" inputmode="numeric"></div><div><label for="durationSeconds">Secondes</label><input id="durationSeconds" type="number" min="0" max="59" value="0" inputmode="numeric"></div></div>
+      <button class="btn" id="timerBtn" onclick="startTimer()">Démarrer le minuteur</button>
+      <button class="btn secondary" onclick="stopTimer()">Arrêter</button>
+      <div class="notice">Garde NightFlow ouvert pendant le compte à rebours. iOS peut suspendre une page web lorsque l’écran est verrouillé.</div>
+    </section>
+
+    <section class="card full">
+      <div class="row">
+        <div class="icon" style="margin:0">🎧</div><div class="grow"><h2>Mes playlists Deezer</h2><div class="sub">Ajoute tes liens pour les retrouver ici.</div></div>
+      </div>
+      <div id="playlistList" style="margin-top:15px"></div>
+      <button class="btn" onclick="openModal('playlistModal')">+ Ajouter une playlist</button>
+    </section>
+
+    <section class="card">
+      <div class="icon">🌌</div><h2>Mode Sommeil</h2><div class="sub">Lance ton raccourci iPhone pour activer la Concentration Sommeil.</div>
+      <button class="btn" onclick="runShortcut('sleep')">Activer Sommeil</button>
+    </section>
+    <section class="card">
+      <div class="icon">✈️</div><h2>Mode avion</h2><div class="sub">Lance ton raccourci iPhone pour gérer le mode avion.</div>
+      <button class="btn" onclick="runShortcut('air')">Ouvrir le raccourci</button>
+    </section>
+  </main>
+
+  <section class="card full" style="margin-top:14px">
+    <div class="icon">⚙️</div><h2>Connexion aux raccourcis iPhone</h2>
+    <div class="sub">Crée les raccourcis dans l’app Raccourcis, puis colle leurs liens ici. À la fin du minuteur, NightFlow lance un seul raccourci qui doit activer Sommeil puis Avion, dans cet ordre.</div>
+    <label>Lien du raccourci de fin « NightFlow Fin »</label>
+    <input id="endShortcutUrl" type="url" placeholder="shortcuts://run-shortcut?name=NightFlow%20Fin">
+    <label>Lien du raccourci d’alarme « NightFlow Alarme » (facultatif)</label>
+    <input id="alarmShortcutUrl" type="url" placeholder="shortcuts://run-shortcut?name=NightFlow%20Alarme">
+    <label>Lien du raccourci « NightFlow Sommeil » (facultatif, lancement manuel)</label>
+    <input id="sleepShortcutUrl" type="url" placeholder="shortcuts://run-shortcut?name=NightFlow%20Sommeil">
+    <label>Lien du raccourci « NightFlow Avion » (facultatif, lancement manuel)</label>
+    <input id="airShortcutUrl" type="url" placeholder="shortcuts://run-shortcut?name=NightFlow%20Avion">
+    <button class="btn secondary" onclick="saveShortcutSettings()">Enregistrer les raccourcis</button>
+  </section>
+
+  <div class="section-title"><h2>Réveils enregistrés</h2><small>Liste personnelle</small></div>
+  <div id="alarmList"></div>
+  <div class="notice">Important : iOS peut suspendre une page web lorsque l’écran est verrouillé. Le minuteur peut alors ne pas déclencher le raccourci à l’heure prévue. Pour que Sommeil puis Avion soient activés, configure ces deux actions dans le raccourci « NightFlow Fin » et teste-le. Pour un réveil fiable, vérifie toujours l’alarme dans Horloge.</div>
+  <div class="foot">NIGHTFLOW · VERSION PERSONNELLE · TES DONNÉES RESTENT SUR CET APPAREIL</div>
+</div>
+
+<div class="modal" id="alarmModal"><div class="sheet"><button class="close" onclick="closeModal('alarmModal')">Fermer</button><h3>Ajouter un réveil</h3><p>Enregistre un horaire à recopier dans l’application Horloge pour une alarme fiable.</p><label>Heure</label><input type="time" id="alarmTime" value="07:00"><label>Nom</label><input id="alarmLabel" placeholder="Ex. Cours"><button class="btn" onclick="addAlarm()">Enregistrer</button></div></div>
+<div class="modal" id="playlistModal"><div class="sheet"><button class="close" onclick="closeModal('playlistModal')">Fermer</button><h3>Ajouter une playlist</h3><p>Copie le lien de partage de ta playlist depuis Deezer, puis colle-le ici.</p><label>Nom de la playlist</label><input id="playlistName" placeholder="Musique du soir"><label>Lien Deezer</label><input id="playlistUrl" type="url" placeholder="https://www.deezer.com/playlist/..."><label>URL d’une image (facultatif)</label><input id="playlistImage" type="url" placeholder="https://..."><button class="btn" onclick="addPlaylist()">Ajouter la playlist</button></div></div>
+<div class="modal" id="infoModal"><div class="sheet"><button class="close" onclick="closeModal('infoModal')">Fermer</button><h3 id="infoTitle"></h3><p id="infoText"></p></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let alarms=load('nf_alarms',[]), playlists=load('nf_playlists',[]), timerInterval=null, remaining=0;
+function tickClock(){const n=new Date();$('clock').textContent=n.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});$('today').textContent=n.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});$('greeting').textContent=n.getHours()<12?'Bonjour.':n.getHours()<18?'Bonne journée.':'Bonsoir.'}
+setInterval(tickClock,1000);tickClock();
+function openModal(id){$(id).classList.add('show')}function closeModal(id){$(id).classList.remove('show')}
+function showInfo(t,m){$('infoTitle').textContent=t;$('infoText').textContent=m;openModal('infoModal')}
+function addAlarm(){const time=$('alarmTime').value;if(!time)return;alarms.push({time,label:$('alarmLabel').value.trim()||'Réveil'});alarms.sort((a,b)=>a.time.localeCompare(b.time));save('nf_alarms',alarms);renderAlarms();closeModal('alarmModal');$('alarmLabel').value=''}
+function deleteAlarm(i){alarms.splice(i,1);save('nf_alarms',alarms);renderAlarms()}
+function renderAlarms(){$('alarmCount').textContent=alarms.length;$('alarmList').innerHTML=alarms.length?alarms.map((a,i)=>`<div class="alarm"><div class="alarm-head"><div><div class="alarm-time">${escapeHtml(a.time)}</div><div class="alarm-meta">${escapeHtml(a.label)} · À configurer dans Horloge</div></div><button class="del" aria-label="Supprimer" onclick="deleteAlarm(${i})">✕</button></div></div>`).join(''):'<div class="sub">Aucun réveil enregistré pour le moment.</div>'}
+function addPlaylist(){const name=$('playlistName').value.trim(),url=$('playlistUrl').value.trim(),image=$('playlistImage').value.trim();try{const u=new URL(url);if(!['http:','https:'].includes(u.protocol)||!u.hostname.includes('deezer.com'))throw 0;if(!name)throw 0;playlists.push({name,url:u.href,image});save('nf_playlists',playlists);renderPlaylists();closeModal('playlistModal');$('playlistName').value=$('playlistUrl').value=$('playlistImage').value=''}catch{alert('Entre un nom et un lien Deezer valide (https://www.deezer.com/...).')}}
+function deletePlaylist(i){playlists.splice(i,1);save('nf_playlists',playlists);renderPlaylists()}
+function renderPlaylists(){$('playlistList').innerHTML=playlists.length?playlists.map((p,i)=>`<div class="row"><div class="cover">${p.image?`<img src="${escapeAttr(p.image)}" alt="">`:'♫'}</div><div class="grow"><div class="name">${escapeHtml(p.name)}</div><div class="tiny">Playlist Deezer</div></div><button class="play" onclick="location.href='${escapeAttr(p.url)}'" aria-label="Ouvrir ${escapeAttr(p.name)}">▶</button><button class="del" onclick="deletePlaylist(${i})" aria-label="Supprimer">✕</button></div>`).join(''):'<div class="sub">Aucune playlist ajoutée. Utilise le bouton ci-dessous pour commencer.</div>'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function escapeAttr(s){return escapeHtml(s)}
+let timerDeadline=0, timerFinished=false;
+function startTimer(){
+  stopTimer();
+  const mins=Number($('durationMinutes').value), secs=Number($('durationSeconds').value);
+  if(!Number.isInteger(mins)||!Number.isInteger(secs)||mins<0||mins>999||secs<0||secs>59||mins*60+secs<=0){alert('Choisis une durée valide supérieure à zéro.');return}
+  remaining=mins*60+secs;timerDeadline=Date.now()+remaining*1000;timerFinished=false;
+  $('timerStatus').textContent='Minuteur en cours · garde NightFlow ouvert';$('timerBtn').textContent='Redémarrer';
+  updateTimer();timerInterval=setInterval(refreshTimer,250);
+}
+function refreshTimer(){
+  remaining=Math.max(0,Math.ceil((timerDeadline-Date.now())/1000));updateTimer();
+  if(remaining<=0&&!timerFinished){timerFinished=true;clearInterval(timerInterval);timerInterval=null;finishTimer();}
+}
+function updateTimer(){ $('timerDisplay').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0'); }
+function finishTimer(){
+  $('timerStatus').textContent='Temps écoulé · lancement du raccourci de fin';
+  const url=localStorage.getItem('nf_end_url');
+  if(url){showInfo('Minuteur terminé','NightFlow va ouvrir ton raccourci « NightFlow Fin ». Celui-ci doit activer le mode Sommeil, puis le mode Avion.');setTimeout(()=>{location.href=url},700);}
+  else{showInfo('Minuteur terminé','Ajoute le lien du raccourci « NightFlow Fin » dans les réglages. Dans ce raccourci, place l’action Activer le mode de concentration Sommeil, puis l’action Régler le mode Avion sur Activé.');}
+}
+function stopTimer(){if(timerInterval)clearInterval(timerInterval);timerInterval=null;timerDeadline=0;timerFinished=false;remaining=0;$('timerDisplay').textContent='00:00';$('timerStatus').textContent='Minuteur arrêté';$('timerBtn').textContent='Démarrer le minuteur'}
+function runShortcut(kind){const keys={sleep:'nf_sleep_url',air:'nf_air_url',alarm:'nf_alarm_url'};const names={sleep:'NightFlow Sommeil',air:'NightFlow Avion',alarm:'NightFlow Alarme'};const url=localStorage.getItem(keys[kind]);if(url){location.href=url;return}showInfo('Raccourci à configurer',`Crée dans Raccourcis un raccourci nommé « ${names[kind]} », puis ajoute son lien dans les réglages de NightFlow.`)}
+function saveShortcutSettings(){
+  const values={end:$('endShortcutUrl').value.trim(),alarm:$('alarmShortcutUrl').value.trim(),sleep:$('sleepShortcutUrl').value.trim(),air:$('airShortcutUrl').value.trim()};
+  for(const [label,url] of Object.entries(values)){if(url&&!url.startsWith('shortcuts://')){alert('Tous les liens doivent commencer par shortcuts://');return}}
+  localStorage.setItem('nf_end_url',values.end);localStorage.setItem('nf_alarm_url',values.alarm);localStorage.setItem('nf_sleep_url',values.sleep);localStorage.setItem('nf_air_url',values.air);alert('Raccourcis enregistrés.');
+}
+$('endShortcutUrl').value=localStorage.getItem('nf_end_url')||'';
+$('alarmShortcutUrl').value=localStorage.getItem('nf_alarm_url')||'';
+$('sleepShortcutUrl').value=localStorage.getItem('nf_sleep_url')||'';
+$('airShortcutUrl').value=localStorage.getItem('nf_air_url')||'';
+renderAlarms();renderPlaylists();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&timerDeadline&&!timerFinished)refreshTimer()});
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
